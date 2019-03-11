@@ -1,0 +1,13 @@
+{
+    "require": {
+        "phroute/phroute": "^2.1"
+    },
+    "autoload": {
+    	"files": [
+    		"app/Helpers/helpers.php"
+    	],
+    	"psr-4": {
+    		"App\\": "app/"
+    	}
+    }
+}
