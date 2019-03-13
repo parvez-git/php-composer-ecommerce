@@ -1,6 +1,9 @@
 {
     "require": {
-        "phroute/phroute": "^2.1"
+        "phroute/phroute": "^2.1",
+        "illuminate/database": "^5.8",
+        "illuminate/validation": "^5.8",
+        "illuminate/translation": "^5.8"
     },
     "autoload": {
     	"files": [
