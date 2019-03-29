@@ -1,15 +1,20 @@
 {
-	"name": "PHP-E-COMMECRE",
-	"version": "1.0.0",
-	"description": "A PHP e-commerce project from LLC",
-	"author": "parvez alam",
-	"licence": "MIT",
-	"dependencies": {
-		"bootstrap": "^4.3.1",
-		"feather-icons": "^4.19.0",
-		"jquery": "^3.3.1"
-	},
-	"devDependencies": {
-		"@fortawesome/fontawesome-free": "^5.7.2"
-	}
+  "name": "php-ecommerce",
+  "version": "1.0.0",
+  "description": "A PHP e-commerce project from LLC",
+  "author": "parvez alam",
+  "licence": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/parvez-git/php-composer-ecommerce.git"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "feather-icons": "^4.19.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.7"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.7.2"
+  }
 }

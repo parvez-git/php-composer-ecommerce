@@ -1,4 +1,6 @@
 {
+    "name": "php-ecommerce/llc",
+    "description": "A PHP e-commerce project from LLC",
     "require": {
         "phroute/phroute": "^2.1",
         "illuminate/database": "^5.8",
@@ -7,11 +9,11 @@
         "phpmailer/phpmailer": "^6.0"
     },
     "autoload": {
-    	"files": [
-    		"app/Helpers/helpers.php"
-    	],
-    	"psr-4": {
-    		"App\\": "app/"
-    	}
+        "files": [
+            "app/Helpers/helpers.php"
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        }
     }
 }

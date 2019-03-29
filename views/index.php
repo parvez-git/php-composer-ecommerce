@@ -1,6 +1,6 @@
-<?php include_once('header.php'); ?>
+<?php include_once('partials/header.php'); ?>
 
-<?php include_once('slider.php'); ?>
+<?php include_once('partials/slider.php'); ?>
 
 	<div class="main">
 
@@ -137,4 +137,4 @@
 
 	</div>
 
-<?php include_once('footer.php'); ?>
+<?php include_once('partials/footer.php'); ?>

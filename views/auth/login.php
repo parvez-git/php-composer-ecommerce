@@ -20,34 +20,16 @@
 
 			<div class="session-msg mt-5">
 
-				<!-- SUCCESS MESSAGE -->
-				<?php if(isset($_SESSION['success'])) : ?>
-					<div class="alert alert-success alert-dismissible fade show" role="alert">
-					  	<span><?php echo $_SESSION['success']; ?></span>
-					  	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					    <span aria-hidden="true">&times;</span>
-					  </button>
-					</div>
-				<?php endif; ?>	
+				<?php partials('notifications'); ?>
 
-				<?php if(isset($_SESSION['mailsend'])) : ?>
+				<?php if (isset($_SESSION['mailsend'])): ?>
 					<div class="alert alert-success alert-dismissible fade show" role="alert">
 					  	<span><?php echo $_SESSION['mailsend']; ?></span>
 					  	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					    <span aria-hidden="true">&times;</span>
 					  </button>
 					</div>
-				<?php endif; ?>
-
-				<!-- ERROR MESSAGE -->
-				<?php if(isset($_SESSION['error'])) : ?>
-					<div class="alert alert-warning alert-dismissible fade show" role="alert">
-					  	<span><?php echo $_SESSION['error']; ?></span>
-					  	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					    <span aria-hidden="true">&times;</span>
-					  </button>
-					</div>
-				<?php endif; ?>
+				<?php endif;?>
 
 			</div>
 
@@ -56,20 +38,20 @@
 		          <div class="form-group">
 		             <label>User Email</label>
 		             <input type="email" name="email" class="form-control rounded-0" placeholder="User Email">
-		             <?php if(isset($_SESSION['login-email-error'])) : ?>
+		             <?php if (isset($_SESSION['login-email-error'])): ?>
 		             	 <small class="form-text text-danger">
 		             	 	<?php echo $_SESSION['login-email-error'][0]; ?>
 		             	 </small>
-		             <?php endif; ?>
+		             <?php endif;?>
 		          </div>
 		          <div class="form-group">
 		             <label>Password</label>
 		             <input type="password" name="password" class="form-control rounded-0" placeholder="Password">
-		             <?php if(isset($_SESSION['login-password-error'])) : ?>
+		             <?php if (isset($_SESSION['login-password-error'])): ?>
 		             	 <small class="form-text text-danger">
 		             	 	<?php echo $_SESSION['login-password-error'][0]; ?>
 		             	 </small>
-		             <?php endif; ?>
+		             <?php endif;?>
 		          </div>
 		          <button type="submit" class="btn btn-black rounded-0">Login</button>
 		          <a href="/register" class="btn btn-default">Not member yet?</a>

@@ -17,7 +17,6 @@ class HomeController
 		return view('index');
 	}
 
-
 	public function getLogin()
 	{
 		return view('auth/login');
@@ -99,9 +98,7 @@ class HomeController
 			exit();
 		}
 
-
 	}
-
 
 	public function getRegister()
 	{
@@ -128,14 +125,11 @@ class HomeController
 		    ]
 		);
 
-		// $validator->fails();
-		// $validator->passes();
-		// $validator->errors();
 		if ($validator->fails()) {
 
-			$_SESSION['validate-name'] = $validator->errors()->get('name');
-			$_SESSION['validate-email'] = $validator->errors()->get('email');
-			$_SESSION['validate-password'] = $validator->errors()->get('password');
+			$_SESSION['validate-name'] 		= $validator->errors()->get('name');
+			$_SESSION['validate-email'] 	= $validator->errors()->get('email');
+			$_SESSION['validate-password'] 	= $validator->errors()->get('password');
 
 			header('Location: /register');
 			exit();
@@ -145,14 +139,14 @@ class HomeController
 		$mail = new PHPMailer(true);                  
 		try {
 		    //Server settings
-		    $mail->SMTPDebug = 2;                           
+		    $mail->SMTPDebug 	= 2;                           
 		    $mail->isSMTP();                                
-		    $mail->Host = '	smtp.mailtrap.io';  			
-		    $mail->SMTPAuth = true;                         
-		    $mail->Username = '806bc3f34997d1';            
-		    $mail->Password = '7c70597697e1de';             
-		    $mail->SMTPSecure = 'tls';             			
-		    $mail->Port = 2525;                    			
+		    $mail->Host 		= 'smtp.mailtrap.io';  			
+		    $mail->SMTPAuth 	= true;                         
+		    $mail->Username 	= '806bc3f34997d1';            
+		    $mail->Password 	= '7c70597697e1de';             
+		    $mail->SMTPSecure 	= 'tls';             			
+		    $mail->Port 		= 2525;                    			
 
 		    //Recipients
 		    $mail->setFrom('from@example.com', 'Mailer');
@@ -164,12 +158,9 @@ class HomeController
 		    $mail->Body    = "Dear $name, <br><br>Please active your account by click link: <br><a href='http://localhost:8000/active/$token'>Active Your Account.</a>";
 		    $mail->AltBody = "Please active you account by using the link: http://localhost:8000/active/$token";
 
-		    // $mail->send();
-
 		} catch (Exception $e) {
 		    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 		}
-
 
 		if ($mail->send()) {
 
@@ -220,5 +211,16 @@ class HomeController
 			header('Location: /login');
 			exit();
 		}
+	}
+
+	public function getLogout()
+	{
+		unset($_SESSION['login']);
+		unset($_SESSION['userid']);
+
+		$_SESSION['success'] = 'You have been logout.';
+
+		header('Location: /login');
+		exit();
 	}
 }

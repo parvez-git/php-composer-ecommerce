@@ -13,8 +13,35 @@ if (!function_exists('view')) {
 	}
 }
 
+// FRONT-END PARTIALS
+if (!function_exists('partials')) {
+	
+	function partials($view)
+	{
+		if (empty($view)) {
+			
+			return 'No partials passed!';
+		}
 
-// RANDOM STRING GENERATE
+		require_once __DIR__ . '/../../views/partials/'.$view.'.php';
+	}
+}
+
+// BACKEND PARTIALS
+if (!function_exists('backendpartials')) {
+	
+	function backendpartials($view)
+	{
+		if (empty($view)) {
+			
+			return 'No backend partials passed!';
+		}
+
+		require_once __DIR__ . '/../../views/backend/partials/'.$view.'.php';
+	}
+}
+
+// RANDOM STRING GENERATOR
 if (!function_exists('randomString')) {
 
 	function randomString($length = 60) {

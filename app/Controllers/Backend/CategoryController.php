@@ -2,10 +2,10 @@
 
 namespace App\Controllers\Backend;
 
-class DashboardController
+class CategoryController
 {
 	public function getIndex()
 	{
-		return view('backend/index');
+		return view('backend/categories/index');
 	}
 }
