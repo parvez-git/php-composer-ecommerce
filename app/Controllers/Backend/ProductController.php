@@ -6,6 +6,6 @@ class ProductController
 {
     public function getIndex() 
     {
-        return view('backend/products/index');
+        view('backend/products/index');
     }
 }

@@ -2,8 +2,10 @@
 
 if (!function_exists('view')) {
 	
-	function view($view)
+	function view($view, $data = [])
 	{
+		extract($data);
+		
 		if (empty($view)) {
 			
 			return 'No view passed';
@@ -41,6 +43,16 @@ if (!function_exists('backendpartials')) {
 	}
 }
 
+// REDIRECT
+if (!function_exists('redirect')) {
+	
+	function redirect($location = '/') {
+
+		header('Location: '.$location);
+		exit();
+	}
+}
+
 // RANDOM STRING GENERATOR
 if (!function_exists('randomString')) {
 
@@ -55,3 +67,14 @@ if (!function_exists('randomString')) {
 		return $str;
 	}
 }
+
+// CREATE SLUG FROM STRING
+if (!function_exists('createSlug')) {
+
+	function createSlug($str, $delimiter = '-') {
+
+		$slug = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $str))))), $delimiter));
+
+		return $slug;
+	} 
+} 

@@ -17,6 +17,11 @@
 	</div>
 	<div class="main-login-area">
 		<div class="col-md-6 col-sm-12">
+
+			<div class="session-msg mt-5">
+				<?php partials('notifications'); ?>
+			</div>
+
 		    <div class="register-form">
 		       <form action="/register" method="post">
 		          <div class="form-group">
@@ -52,5 +57,7 @@
 		    </div>
 		</div>
 	</div>
+	<script src="../node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
+	<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>

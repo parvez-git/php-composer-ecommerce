@@ -6,6 +6,6 @@ class DashboardController
 {
 	public function getIndex()
 	{
-		return view('backend/index');
+		view('backend/index');
 	}
 }

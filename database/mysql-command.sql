@@ -11,3 +11,11 @@ CREATE TABLE users (
     email_verification_token VARCHAR(255),
     PRIMARY KEY (id)
 );
+
+CREATE TABLE categories (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name CHAR(60) NOT NULL,
+    slug CHAR(255) NOT NULL,
+    active BOOLEAN NOT NULL,
+    PRIMARY KEY (id)
+);

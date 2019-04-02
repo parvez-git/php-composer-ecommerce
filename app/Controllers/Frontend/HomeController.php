@@ -14,12 +14,12 @@ class HomeController
 {
 	public function getIndex()
 	{
-		return view('index');
+		view('index');
 	}
 
 	public function getLogin()
 	{
-		return view('auth/login');
+		view('auth/login');
 	}	
 
 	public function postLogin()
@@ -43,8 +43,7 @@ class HomeController
 			$_SESSION['login-email-error'] 		= $validator->errors()->get('email');
 			$_SESSION['login-password-error'] 	= $validator->errors()->get('password');
 
-			header('Location: /login');
-			exit();
+			redirect('/login');
 		}
 
 		$user = User::where('email', $email)->first();
@@ -64,8 +63,7 @@ class HomeController
 			    	
 					$_SESSION['error']  	= 'Email account not verified.';
 
-					header('Location: /login');
-					exit();
+					redirect('/login');
 
 			    } else {
 
@@ -73,17 +71,14 @@ class HomeController
 			    	$_SESSION['userid']  	= $user->id;
 			    	$_SESSION['login']  	= true;
 
-			    	header('Location: /dashboard');
-					exit();
+			    	redirect('/dashboard');
 			    }
 
 			} else {
 
 				$_SESSION['error']  = 'Invalid password.';
 
-				header('Location: /login');
-				exit();
-
+				redirect('/login');
 			}
 
 		} else {
@@ -94,15 +89,14 @@ class HomeController
 			$_SESSION['success']				= NULL;
 			$_SESSION['error']  				= 'Invalid credentials.';
 
-			header('Location: /login');
-			exit();
+			redirect('/login');
 		}
 
 	}
 
 	public function getRegister()
 	{
-		return view('auth/register');
+		view('auth/register');
 	}
 
 	public function postRegister()
@@ -131,39 +125,10 @@ class HomeController
 			$_SESSION['validate-email'] 	= $validator->errors()->get('email');
 			$_SESSION['validate-password'] 	= $validator->errors()->get('password');
 
-			header('Location: /register');
-			exit();
+			redirect('/register');
 		}
 
-
-		$mail = new PHPMailer(true);                  
 		try {
-		    //Server settings
-		    $mail->SMTPDebug 	= 2;                           
-		    $mail->isSMTP();                                
-		    $mail->Host 		= 'smtp.mailtrap.io';  			
-		    $mail->SMTPAuth 	= true;                         
-		    $mail->Username 	= '806bc3f34997d1';            
-		    $mail->Password 	= '7c70597697e1de';             
-		    $mail->SMTPSecure 	= 'tls';             			
-		    $mail->Port 		= 2525;                    			
-
-		    //Recipients
-		    $mail->setFrom('from@example.com', 'Mailer');
-		    $mail->addAddress($email, $name);  
-
-		    //Content
-		    $mail->isHTML(true);                          
-		    $mail->Subject = "Verify you email account";
-		    $mail->Body    = "Dear $name, <br><br>Please active your account by click link: <br><a href='http://localhost:8000/active/$token'>Active Your Account.</a>";
-		    $mail->AltBody = "Please active you account by using the link: http://localhost:8000/active/$token";
-
-		} catch (Exception $e) {
-		    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
-		}
-
-		if ($mail->send()) {
-
 			$user = User::create([
 				'name' 						=> $name,
 				'email' 					=> $email,
@@ -172,6 +137,42 @@ class HomeController
 				'email_verification_token' 	=> $token
 			]);
 
+			$mail = new PHPMailer(true);                  
+			try {
+				//Server settings
+				$mail->SMTPDebug 	= 2;                           
+				$mail->isSMTP();                                
+				$mail->Host 		= 'smtp.mailtrap.io';  			
+				$mail->SMTPAuth 	= true;                         
+				$mail->Username 	= '806bc3f34997d1';            
+				$mail->Password 	= '7c70597697e1de';             
+				$mail->SMTPSecure 	= 'tls';             			
+				$mail->Port 		= 2525;                    			
+	
+				//Recipients
+				$mail->setFrom('from@example.com', 'Mailer');
+				$mail->addAddress($email, $name);  
+	
+				//Content
+				$mail->isHTML(true);                          
+				$mail->Subject = "Verify you email account";
+				$mail->Body    = "Dear $name, <br><br>Please active your account by click link: <br><a href='http://localhost:8000/active/$token'>Active Your Account.</a>";
+				$mail->AltBody = "Please active you account by using the link: http://localhost:8000/active/$token";
+
+				$mail->send();
+	
+			} catch (Exception $e) {
+				// echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+
+				$_SESSION['success'] 			= NULL;
+				$_SESSION['validate-name'] 		= NULL;
+				$_SESSION['validate-email'] 	= NULL;
+				$_SESSION['validate-password'] 	= NULL;
+				$_SESSION['error'] 				= 'Account activation message could not be sent. '.$mail->ErrorInfo;
+	
+				redirect('/register');
+			}
+
 			$_SESSION['mailsend'] 			= 'Activation mail has been sent.';
 			$_SESSION['success']  			= 'Registration completed successfully.';
 			$_SESSION['error'] 				= NULL;
@@ -179,8 +180,17 @@ class HomeController
 			$_SESSION['validate-email'] 	= NULL;
 			$_SESSION['validate-password'] 	= NULL;
 
-			header('Location: /login');
-			exit();
+			redirect('/login');
+
+		} catch (\Exception $e) {
+
+			$_SESSION['success'] 			= NULL;
+			$_SESSION['validate-name'] 		= NULL;
+			$_SESSION['validate-email'] 	= NULL;
+			$_SESSION['validate-password'] 	= NULL;
+			$_SESSION['error'] 				= 'Email address is already taken!';
+
+			redirect('/register');
 		}
 	}
 
@@ -192,15 +202,15 @@ class HomeController
 			
 			$user->update([
 				'email_verified_at' 		=> Carbon::now(),
-				'email_verification_token' 	=> NULL
+				'email_verification_token' 	=> NULL,
+				'active' 					=> 1
 			]);
 
 			$_SESSION['mailsend'] 	= NULL;
 			$_SESSION['error'] 		= NULL;
 			$_SESSION['success']  	= 'Account activated successfully.';
 
-			header('Location: /login');
-			exit();
+			redirect('/login');
 
 		} else {
 
@@ -208,8 +218,7 @@ class HomeController
 			$_SESSION['success']  	= NULL;
 			$_SESSION['error']  	= 'Incorrect activation token.';
 
-			header('Location: /login');
-			exit();
+			redirect('/login');
 		}
 	}
 
@@ -218,9 +227,9 @@ class HomeController
 		unset($_SESSION['login']);
 		unset($_SESSION['userid']);
 
-		$_SESSION['success'] = 'You have been logout.';
+		$_SESSION['success'] 	= 'You have been logout.';
+		$_SESSION['error'] 		= NULL;
 
-		header('Location: /login');
-		exit();
+		redirect('/login');
 	}
 }
