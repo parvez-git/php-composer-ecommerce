@@ -13,7 +13,7 @@ use Carbon\Carbon;
 class HomeController
 {
 	public function getIndex()
-	{
+	{ 
 		view('index');
 	}
 
@@ -153,11 +153,12 @@ class HomeController
 				$mail->setFrom('from@example.com', 'Mailer');
 				$mail->addAddress($email, $name);  
 	
+				$httphost = $_SERVER['HTTP_HOST']; // Temporary
 				//Content
 				$mail->isHTML(true);                          
 				$mail->Subject = "Verify you email account";
-				$mail->Body    = "Dear $name, <br><br>Please active your account by click link: <br><a href='http://localhost:8000/active/$token'>Active Your Account.</a>";
-				$mail->AltBody = "Please active you account by using the link: http://localhost:8000/active/$token";
+				$mail->Body    = "Dear $name, <br><br>Please active your account by click link: <br><a href='http://$httphost/active/$token'>Active Your Account.</a>";
+				$mail->AltBody = "Please active you account by using the link: http://$httphost/active/$token";
 
 				$mail->send();
 	

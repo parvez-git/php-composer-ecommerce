@@ -22,3 +22,16 @@ Capsule::schema()->create('categories', function ($table) {
     $table->boolean('active');
     $table->timestamps();
 });
+
+Capsule::schema()->create('products', function ($table) {
+    $table->increments('id');
+    $table->string('title');
+    $table->integer('category_id');
+    $table->string('slug')->unique();
+    $table->text('description');
+    $table->float('price');
+    $table->float('sale_price');
+    $table->string('image');
+    $table->boolean('active');
+    $table->timestamps();
+});
