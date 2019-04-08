@@ -2,19 +2,40 @@
 
 namespace App\Controllers\Frontend;
 
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Product;
 use App\Helpers\ValidatorFactory;
 
-use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
-use Carbon\Carbon;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class HomeController
 {
 	public function getIndex()
 	{ 
-		view('index');
+		$products = Product::where('active',true)->get();
+
+		view('index', ['products' => $products]);
+	}
+
+	public function getProduct($slug = NULL) 
+	{
+		if($slug == NULL) {
+			redirect('/');
+		}
+
+		$product = Product::where('slug',$slug)->first();
+
+		if(empty($product)) {
+
+			redirect('/');
+
+		} else {
+
+			view('product', ['product' => $product]);
+		}
+		
 	}
 
 	public function getLogin()
@@ -233,4 +254,7 @@ class HomeController
 
 		redirect('/login');
 	}
+
+
+
 }

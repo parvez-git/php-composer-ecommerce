@@ -3,12 +3,14 @@
 use Phroute\Phroute\Dispatcher;
 use Phroute\Phroute\RouteParser;
 use Phroute\Phroute\RouteCollector;
+
+use App\Controllers\Frontend\CartController;
 use App\Controllers\Frontend\HomeController;
 
 use App\Controllers\Backend\ProductController;
 use App\Controllers\Backend\CategoryController;
-
 use App\Controllers\Backend\DashboardController;
+
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
@@ -42,6 +44,7 @@ session_start();
 $router = new RouteCollector(new RouteParser);
 
 $router->controller('/', HomeController::class);
+$router->controller('/cart', CartController::class);
 
 $router->filter('auth', function() {    
     if(!isset($_SESSION['login'])) {
