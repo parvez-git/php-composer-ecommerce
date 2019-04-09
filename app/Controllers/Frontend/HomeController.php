@@ -40,6 +40,10 @@ class HomeController
 
 	public function getLogin()
 	{
+		if ($_SESSION['login']) {
+			redirect('/dashboard');
+		}
+
 		view('auth/login');
 	}	
 
@@ -117,6 +121,10 @@ class HomeController
 
 	public function getRegister()
 	{
+		if ($_SESSION['login']) {
+			redirect('/dashboard');
+		}
+		
 		view('auth/register');
 	}
 

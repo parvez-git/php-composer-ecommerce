@@ -9,6 +9,7 @@ use App\Controllers\Frontend\HomeController;
 
 use App\Controllers\Backend\ProductController;
 use App\Controllers\Backend\CategoryController;
+use App\Controllers\Backend\CheckoutController;
 use App\Controllers\Backend\DashboardController;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -16,27 +17,8 @@ use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 
 
-require_once 'vendor/autoload.php';
+require_once 'config.php';
 
-
-// ILLUMINATE DATABASE
-$capsule = new Capsule;
-
-$capsule->addConnection([
-    'driver'    => 'mysql',
-    'host'      => 'localhost',
-    'database'  => 'php_ecommerce_llc',
-    'username'  => 'parvez',
-    'password'  => 'password',
-    'charset'   => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'prefix'    => '',
-]);
-
-$capsule->setAsGlobal();
-$capsule->bootEloquent();
-
-// SESSION START
 session_start();
 
 
@@ -51,6 +33,10 @@ $router->filter('auth', function() {
         header('Location: /login');
         return false;
     }
+});
+
+$router->group(['before' => 'auth'], function(RouteCollector $router){
+    $router->controller('/checkout', CheckoutController::class);
 });
 
 $router->group(['prefix' => 'dashboard', 'before' => 'auth'], function(RouteCollector $router){

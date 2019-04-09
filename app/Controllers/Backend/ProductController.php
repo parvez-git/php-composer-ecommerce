@@ -61,7 +61,7 @@ class ProductController
 		$imgrandname 	= 'product-'.time();
 		$imageext 	 	= explode('.', $image['name']);
 		$extension 	 	= end($imageext);
-		$imagename	 	= 'images/products/' . $imgrandname . '.' . strtolower($extension);
+		$imagename	 	= 'assets/images/products/' . $imgrandname . '.' . strtolower($extension);
 
 		move_uploaded_file($image['tmp_name'], $imagename);
 
@@ -155,7 +155,7 @@ class ProductController
 			$imgrandname 	= 'product-'.time();
 			$imageext 	 	= explode('.', $image['name']);
 			$extension 	 	= end($imageext);
-			$imagename	 	= 'images/products/' . $imgrandname . '.' . strtolower($extension);
+			$imagename	 	= 'assets/images/products/' . $imgrandname . '.' . strtolower($extension);
 
 			move_uploaded_file($image['tmp_name'], $imagename);
 

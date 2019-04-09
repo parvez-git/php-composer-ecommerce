@@ -12,6 +12,6 @@
 02. `cd php-composer-ecommerce`
 03. `composer install`
 04. `npm install`
-05. CREATE DATABASE & config: database.php
+05. CREATE DATABASE & config: config.php
 06. `php database/create-tables.php`
 07. `php -S 127.0.0.1:8000`

@@ -1,4 +1,5 @@
 /node_modules
 /vendor
-/images/products/*.png
-/images/products/*.jpg
+assets/images/products/*.png
+assets/images/products/*.jpg
+assets/images/sliders/!bg.jpg
