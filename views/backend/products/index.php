@@ -24,6 +24,7 @@
                         <th>Category</th>
                         <th>Price</th>
                         <th>Sale Price</th>
+                        <th>Slider</th>
                         <th>Active</th>
                         <th>Action</th>
                         </tr>
@@ -41,6 +42,13 @@
                             <td><?php echo $product->category->name; ?></td>
                             <td>$<?php echo $product->price; ?></td>
                             <td>$<?php echo $product->sale_price; ?></td>
+                            <td>
+                                <?php if($product->active_on_slider) : ?>
+                                    <button type="button" class="badge badge-success rounded-0 border-0 p-1">active</button>
+                                <?php else: ?>
+                                    <button type="button" class="badge badge-danger rounded-0 border-0 p-1">inactive</button>
+                                <?php endif; ?>
+                            </td>
                             <td>
                                 <?php if($product->active) : ?>
                                     <button type="button" class="badge badge-success rounded-0 border-0 p-1">active</button>

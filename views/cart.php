@@ -84,7 +84,7 @@
         </div>
 
         <?php else: ?>
-            <h4 class="m-auto text-info">No Product added to Cart!</h4>
+            <h4 class="m-auto text-info" style="min-height:220px;margin-top:3rem!important;">No Product added to Cart!</h4>
         <?php endif; ?>
 
     </div>

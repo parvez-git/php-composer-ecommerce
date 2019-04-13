@@ -65,18 +65,20 @@ class ProductController
 
 		move_uploaded_file($image['tmp_name'], $imagename);
 
-		$active = isset($_POST['active']) ? true : false;
+		$active 		= isset($_POST['active']) ? true : false;
+        $activeonslider = isset($_POST['active_on_slider']) ? true : false;
 
 		try {
 			$product = Product::create([
-				'title' 	    => $title,
-		    	'category_id' 	=> $categoryid,
-		    	'description' 	=> $description,
-		    	'price' 	    => $price,
-		    	'sale_price' 	=> $saleprice,
-				'slug' 		    => $slug,
-				'image' 		=> $imagename,
-				'active' 	    => $active
+				'title' 	    	=> $title,
+		    	'category_id' 		=> $categoryid,
+		    	'description' 		=> $description,
+		    	'price' 	    	=> $price,
+		    	'sale_price' 		=> $saleprice,
+				'slug' 		   	 	=> $slug,
+				'image' 			=> $imagename,
+				'active_on_slider'	=> $activeonslider,
+				'active' 	    	=> $active
 			]);
 
 			$_SESSION['error'] 				= NULL;
@@ -142,7 +144,8 @@ class ProductController
 			redirect('/dashboard/products/edit/'.$id);
 		}
 		
-        $active = isset($_POST['active']) ? true : false;
+        $active 		= isset($_POST['active']) ? true : false;
+        $activeonslider = isset($_POST['active_on_slider']) ? true : false;
         
 		$product = Product::find($id);
 		
@@ -164,14 +167,15 @@ class ProductController
 		}
 
         $product->update([
-            'title' 	    => $title,
-            'category_id' 	=> $categoryid,
-            'description' 	=> $description,
-            'price' 	    => $price,
-            'sale_price' 	=> $saleprice,
-            'slug' 		    => $slug,
-            'image' 		=> $imagename,
-            'active' 	    => $active
+            'title' 	    	=> $title,
+            'category_id' 		=> $categoryid,
+            'description' 		=> $description,
+            'price' 	    	=> $price,
+            'sale_price' 		=> $saleprice,
+            'slug' 		    	=> $slug,
+            'image' 			=> $imagename,
+            'active_on_slider'	=> $activeonslider,
+            'active' 	    	=> $active
         ]);
 
         $_SESSION['error'] 				= NULL;

@@ -11,8 +11,11 @@
 
 	<div class="login-sidenav">
 		<div class="login-main-text">
-		    <h2>Application<br> Registration</h2>
-		    <p><a href="/login">Login</a> or register from here to access.</p>
+			<a class="py-2" href="/">
+				<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mb-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Product</title><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/></svg>
+			</a>
+		   <h2>Application<br> Registration</h2>
+		   <p><a href="/login">Login</a> or register from here to access.</p>
 		</div>
 	</div>
 	<div class="main-login-area">

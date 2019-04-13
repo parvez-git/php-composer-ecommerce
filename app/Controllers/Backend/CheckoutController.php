@@ -12,7 +12,11 @@ class CheckoutController
 	{
         $user = User::find($_SESSION['userid']);
         
-		$cart = $_SESSION['cart'] ?? [];
+        $cart = $_SESSION['cart'] ?? [];
+        
+        if(empty($cart)) {
+            redirect('/');
+        }
 
 		$subtotal 		= array_sum(array_column($cart,'total_price'));
 		$shippingprice 	= 100;

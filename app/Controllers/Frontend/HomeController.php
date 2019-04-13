@@ -5,8 +5,9 @@ namespace App\Controllers\Frontend;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Product;
-use App\Helpers\ValidatorFactory;
+use App\Models\Category;
 
+use App\Helpers\ValidatorFactory;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -14,9 +15,10 @@ class HomeController
 {
 	public function getIndex()
 	{ 
+		$sliders  = Product::where('active_on_slider',true)->get();
 		$products = Product::where('active',true)->get();
 
-		view('index', ['products' => $products]);
+		view('index', ['sliders' => $sliders, 'products' => $products]);
 	}
 
 	public function getProduct($slug = NULL) 
@@ -38,6 +40,16 @@ class HomeController
 		
 	}
 
+	public function getProductlist()
+	{
+		$categories = Category::withCount('products')->get();
+		$products 	= Product::where('active',true)->get();
+
+		view('product-list', ['categories' => $categories, 'products' => $products]);
+	}
+
+
+	// LOGIN
 	public function getLogin()
 	{
 		if ($_SESSION['login']) {

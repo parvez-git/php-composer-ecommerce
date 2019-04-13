@@ -18,7 +18,12 @@
 		                    <ul class="social">
 		                        <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
 		                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-		                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+		                        <li>
+									<form action="/cart/addcart" method="post">
+										<input type="hidden" name="product_id" value="<?php echo $product->id; ?>">
+										<button type="submit" class="add-to-cart p-0" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></button>
+									</form>
+								</li>
 		                    </ul>
 		                    <span class="product-new-label">Sale</span>
 		                    <span class="product-discount-label">20%</span>
@@ -37,7 +42,10 @@
 		                    <div class="price">$<?php echo $product->sale_price; ?>
 		                        <span>$<?php echo $product->price; ?></span>
 		                    </div>
-		                    <a class="add-to-cart" href="">+ Add To Cart</a>
+							<form action="/cart/addcart" method="post">
+								<input type="hidden" name="product_id" value="<?php echo $product->id; ?>">
+								<button type="submit" class="add-to-cart p-0">+ Add To Cart</button>
+							</form>
 		                </div>
 		            </div>
 				</div>

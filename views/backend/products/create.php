@@ -67,6 +67,15 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <div class="col-sm-2">Active on Slider</div>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="active_on_slider" id="active_on_slider">
+                            <label class="form-check-label" for="active_on_slider">Active</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-10">
                         <button type="submit" class="btn btn-primary rounded-0">Create</button>

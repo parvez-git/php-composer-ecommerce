@@ -1,6 +1,13 @@
-/*
- * Custom translucent site header
- */
+/* COMMON CSS
+-------------------------------------------------- */
+
+.w-max-480 {
+    max-width: 480px;
+}
+
+
+/* Custom translucent site header
+-------------------------------------------------- */
 
 .site-header {
     background-color: rgba(0, 0, 0, .85);
@@ -566,6 +573,7 @@ img {
     display: inline-block
 }
 
+.product-grid .social li button,
 .product-grid .social li a {
     color: #fff;
     background-color: #333;
@@ -580,9 +588,14 @@ img {
     transition: all .3s ease-in-out
 }
 
+.product-grid .social li button:hover,
 .product-grid .social li a:hover {
     color: #fff;
     background-color: #ef5777
+}
+
+.product-grid .social li button:focus {
+    outline: none;
 }
 
 .product-grid .social li a:after,
@@ -712,10 +725,56 @@ img {
     font-weight: 600
 }
 
+.product-grid .add-to-cart:hover {
+    text-decoration: underline;
+}
+
 @media only screen and (max-width:990px) {
     .product-grid {
         margin-bottom: 30px
     }
+}
+
+
+/* PRODUCTS SIDEBAR
+-------------------------------------------------- */
+
+.products-sidebar h2 {
+    text-transform: uppercase;
+    font-size: 18px;
+    color: #333333;
+    font-weight: bold;
+}
+
+.products-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.products-sidebar li {
+    border: 1px solid rgba(0, 0, 0, .1);
+    padding: 4px 8px;
+    margin-top: 5px;
+}
+
+.products-sidebar li:hover {
+    background-color: #F5F5F5;
+    cursor: pointer;
+}
+
+.products-sidebar li a {
+    text-decoration: none;
+    color: #101010;
+}
+
+.products-sidebar li a span {
+    background-color: #ddd;
+    padding: 3px 8px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    float: right;
 }
 
 

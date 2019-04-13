@@ -33,6 +33,7 @@ Capsule::schema()->create('products', function ($table) {
     $table->float('sale_price');
     $table->string('image');
     $table->boolean('active');
+    $table->boolean('active_on_slider');
     $table->timestamps();
 });
 
