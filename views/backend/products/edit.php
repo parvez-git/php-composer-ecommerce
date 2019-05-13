@@ -55,11 +55,26 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Image</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-6">
                         <input type="file" name="image" class="form-control-file">
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-4 text-right">
                         <img width="30px" src="/<?php echo $product->image; ?>" alt="<?php echo $product->title; ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Gallery Image</label>
+                    <div class="col-sm-4">
+                        <input type="file" name="gallery[]" class="form-control-file" multiple>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <?php foreach($product->images as $gallery) : ?>
+                            <a href="/dashboard/products/gallery-delete/<?php echo $gallery->id; ?>" class="product-gallery"
+                                onclick=" return confirm('Are you sure, you want to delete product gallery image!');">
+                                <img src="/<?php echo $gallery->image; ?>" width="30px" alt="<?php echo $product->title; ?>"/>
+                                <span class="icon"><span data-feather="trash-2"></span></span>
+                            <a>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <div class="form-group row">

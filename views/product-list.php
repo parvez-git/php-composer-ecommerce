@@ -12,17 +12,25 @@
 
 			<div class="row">
                 <div class="col-md-3 products-sidebar">
-                    <h2>Categoties</h2>
-                    <ul>
-                        <?php foreach($categories as $category) : ?>
-                            <li>
-                                <a href="#" class="">
-                                    <?php echo $category->name; ?>
-                                    <span><?php echo $category->products_count; ?></span>
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
+                    <div class="category-area">
+                        <h2>Categoties</h2>
+                        <ul>
+                            <?php foreach($categories as $category) : ?>
+                                <li>
+                                    <a href="/productlist/?category=<?php echo $category->slug; ?>">
+                                        <?php echo $category->name; ?>
+                                        <span><?php echo $category->products_count; ?></span>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <div class="search-area mt-5">
+                        <h2>Search Products</h2>
+                        <form action="" method="GET">
+                            <input type="search" name="search" class="search-box">
+                        </form>
+                    </div>
                 </div>
                 <div class="col-md-9">
                     <div class="row">
@@ -31,8 +39,8 @@
                             <div class="product-grid">
                                 <div class="product-image">
                                     <a href="#">
-                                        <img class="pic-1" src="<?php echo $product->image; ?>">
-                                        <img class="pic-2" src="<?php echo $product->image; ?>">
+                                        <img class="pic-1" src="/<?php echo $product->image; ?>">
+                                        <img class="pic-2" src="/<?php echo $product->image; ?>">
                                     </a>
                                     <ul class="social">
                                         <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>

@@ -4,6 +4,7 @@ namespace App\Controllers\Backend;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductImage;
 use App\Helpers\ValidatorFactory;
 
 class ProductController 
@@ -81,10 +82,15 @@ class ProductController
 				'active' 	    	=> $active
 			]);
 
+			$gallery 		= $_FILES["gallery"];
+			$galleryimage 	= $this->productGallery($gallery);
+
+			$product->images()->createMany($galleryimage);
+
 			$_SESSION['error'] 				= NULL;
 			$_SESSION['validator-errors'] 	= NULL;
 			$_SESSION['success'] 			= 'Product created successfully.'; 
-	
+
 			redirect('/dashboard/products');
 
 		} catch (\Exception $e) {
@@ -94,8 +100,8 @@ class ProductController
 
 			redirect('/dashboard/products/create');
 		}
-    }
-    
+	}
+
 	public function getEdit($id = null)
 	{
 		if ($id == null) {
@@ -103,7 +109,7 @@ class ProductController
 		}
 
 		$categories = Category::all();
-		$product    = Product::find($id);
+		$product    = Product::with('images')->find($id);
 
 		view('backend/products/edit', ['categories' => $categories, 'product' => $product]);
     }
@@ -176,7 +182,11 @@ class ProductController
             'image' 			=> $imagename,
             'active_on_slider'	=> $activeonslider,
             'active' 	    	=> $active
-        ]);
+		]);
+		
+		$gallery 		= $_FILES["gallery"];
+		$galleryimage 	= $this->productGallery($gallery);
+		$product->images()->createMany($galleryimage);
 
         $_SESSION['error'] 				= NULL;
         $_SESSION['validator-errors'] 	= NULL;
@@ -191,15 +201,68 @@ class ProductController
 			redirect('/dashboard/products');
 		}
 
-		$product = Product::find($id);
+		$product = Product::with('images')->find($id);
 
 		if(file_exists($product->image)) {
 			unlink($product->image);
 		}
 		$product->delete();
 
+		foreach ($product->images as $gallery) {
+			if(file_exists($gallery->image)) {
+				unlink($gallery->image);
+			}
+		}
+		$product->images()->delete();
+
 		$_SESSION['success'] = 'Product deleted successfully.'; 
 
 		redirect('/dashboard/products');
+	}
+
+	public function getGalleryDelete($id = null)
+	{
+		if ($id == null) {
+			redirect('/dashboard/products');
+		}
+
+		$galleryimg = ProductImage::find($id);
+
+		if(file_exists($galleryimg->image)) {
+			unlink($galleryimg->image);
+		}
+		$galleryimg->delete();
+
+		redirect('/dashboard/products/edit/'.$galleryimg->product_id);
+	}
+
+		
+	protected function productGallery($gallery)
+	{
+		if($gallery) {
+			
+			$galleryimage = [];
+
+			foreach($gallery["tmp_name"] as $key => $tmp_name) {
+
+				$file_name 	= $gallery["name"][$key];
+				$ext 		= pathinfo($file_name,PATHINFO_EXTENSION);
+				$newname	= 'gallery-'.md5(uniqid()).'-'.time().'.'.strtolower($ext);
+
+				$validextensions = array("jpeg", "jpg", "png");
+			
+				if(in_array($ext,$validextensions)) {
+
+					move_uploaded_file($gallery["tmp_name"][$key],"assets/images/productgallery/".$newname);
+
+					$galleryimage[]['image'] = "assets/images/productgallery/" . $newname;
+				}
+				else {
+					$_SESSION['error'] = 'Not valid gallery image type!';
+				}
+			}
+		}
+
+		return $galleryimage;
 	}
 }

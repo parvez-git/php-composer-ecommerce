@@ -58,6 +58,12 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Gallery Image</label>
+                    <div class="col-sm-10">
+                        <input type="file" name="gallery[]" class="form-control-file" multiple>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <div class="col-sm-2">Active</div>
                     <div class="col-sm-10">
                         <div class="form-check">

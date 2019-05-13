@@ -19,6 +19,8 @@ use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 
 require_once 'config.php';
 
+define('BASE_URL', __DIR__);
+
 session_start();
 
 

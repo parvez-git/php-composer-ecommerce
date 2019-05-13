@@ -15,3 +15,7 @@
 05. CREATE DATABASE & config: config.php
 06. `php database/create-tables.php`
 07. `php -S 127.0.0.1:8000`
+
+#### SCREENSHOT
+
+<img src="https://github.com/parvez-git/php-composer-ecommerce/tree/master/assets/images/demo/home.jpg">

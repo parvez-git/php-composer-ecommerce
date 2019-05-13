@@ -6,7 +6,9 @@
         "illuminate/database": "^5.8",
         "illuminate/validation": "^5.8",
         "illuminate/translation": "^5.8",
-        "phpmailer/phpmailer": "^6.0"
+        "phpmailer/phpmailer": "^6.0",
+        "illuminate/pagination": "^5.8",
+        "dompdf/dompdf": "^0.8.3"
     },
     "autoload": {
         "files": [

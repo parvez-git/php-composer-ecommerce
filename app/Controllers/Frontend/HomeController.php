@@ -10,13 +10,14 @@ use App\Models\Category;
 use App\Helpers\ValidatorFactory;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
+use Illuminate\Pagination\Paginator;
 
 class HomeController
 {
 	public function getIndex()
 	{ 
 		$sliders  = Product::where('active_on_slider',true)->get();
-		$products = Product::where('active',true)->get();
+		$products = Product::where('active',true)->paginate(8);
 
 		view('index', ['sliders' => $sliders, 'products' => $products]);
 	}
@@ -27,7 +28,7 @@ class HomeController
 			redirect('/');
 		}
 
-		$product = Product::where('slug',$slug)->first();
+		$product = Product::with('images')->where('slug',$slug)->first();
 
 		if(empty($product)) {
 
@@ -42,9 +43,23 @@ class HomeController
 
 	public function getProductlist()
 	{
-		$categories = Category::withCount('products')->get();
-		$products 	= Product::where('active',true)->get();
+		if (isset($_GET['search']) && ($_GET['search'] != NULL)) {
 
+			$search 	= $_GET['search'];
+			$products 	= Product::where('active',true)->where('title','LIKE','%'.$search.'%')->get();
+
+		} elseif (isset($_GET['category']) && ($_GET['category'] != NULL)) {
+
+			$slug 		= $_GET['category'];
+			$category	= Category::with('products')->where('slug',$slug)->get(); //die($category);
+			$products 	= $category[0]->products; 
+
+		} else {
+			$products 	= Product::where('active',true)->get();
+		}
+
+		$categories = Category::withCount('products')->get();
+		
 		view('product-list', ['categories' => $categories, 'products' => $products]);
 	}
 

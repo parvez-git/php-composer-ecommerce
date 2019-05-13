@@ -50,8 +50,9 @@
 		            </div>
 				</div>
 				<?php endforeach; ?>
+
 		
-		    </div>
+		    </div> <!-- end .row -->
 
 		</div>
 

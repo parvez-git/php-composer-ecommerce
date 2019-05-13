@@ -1,4 +1,4 @@
-<?php include_once('partials/header.php');  /*var_dump($product);die();*/?>
+<?php include_once('partials/header.php'); ?>
 
 	<div class="container my-5">
 		<div class="wrapper row">
@@ -7,32 +7,33 @@
 				<div class="preview-pic tab-content">
 				  	<div class="tab-pane active" id="pic-1">
 				  		<img class="img-fluid" src="/<?php echo $product->image; ?>" />
-				  	</div>
-				  	<div class="tab-pane" id="pic-2">
-				  		<img src="http://placekitten.com/400/252" />
-				  	</div>
-				  	<div class="tab-pane" id="pic-3">
-				  		<img src="http://placekitten.com/400/252" />
-				  	</div>
-				  	<div class="tab-pane" id="pic-4">
-				  		<img src="http://placekitten.com/400/252" />
-				  	</div>
-				  	<div class="tab-pane" id="pic-5">
-				  		<img src="http://placekitten.com/400/252" />
-				  	</div>
+					</div>
+					<?php foreach($product->images as $gallery) : ?>
+				  	<div class="tab-pane" id="pic-gall-<?php echo $gallery->id; ?>">
+				  		<img src="/<?php echo $gallery->image; ?>" />
+					</div>
+					<?php endforeach; ?>
 				</div>
+
+				<?php if(count($product->images) > 0) : ?>
+
 				<ul class="preview-thumbnail nav nav-tabs">
-				  <li class="active">
-				  	<a data-target="#pic-1" data-toggle="tab">
-				  		<img class="img-fluid" src="/<?php echo $product->image; ?>" />
-				  	</a>
-				  </li>
-				  <li><a data-target="#pic-2" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-				  <li><a data-target="#pic-3" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-				  <li><a data-target="#pic-4" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-				  <li><a data-target="#pic-5" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+				  	<li class="active">
+				  		<a data-target="#pic-1" data-toggle="tab">
+				  			<img class="img-fluid" src="/<?php echo $product->image; ?>" />
+				  		</a>
+				  	</li>
+				  	<?php foreach($product->images as $gallery) : ?>
+						<li>
+							<a data-target="#pic-gall-<?php echo $gallery->id; ?>" data-toggle="tab">
+								<img src="/<?php echo $gallery->image; ?>" />
+							</a>
+						</li>
+				  	<?php endforeach; ?>
 				</ul>
-				
+
+				<?php endif; ?>
+
 			</div>
 			<div class="details col-md-6">
 				<h3 class="product-title"><?php echo $product->title; ?></h3>

@@ -20,6 +20,7 @@
                         <th>Product ID</th>
                         <th>Quantity</th>
                         <th>Price</th>
+                        <th>Invoice</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,9 @@
                             <td><?php echo $order->product_id; ?></td>
                             <td><?php echo $order->quantity; ?></td>
                             <td><?php echo $order->price; ?></td>
+                            <td>
+                                <a href="/dashboard/invoice/<?php echo $order->id; ?>" class="btn btn-sm btn-info rounded-0">Invoice</a>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

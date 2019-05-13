@@ -1,7 +1,8 @@
 /node_modules
 /vendor
-assets/images/products/*.png
-assets/images/products/*.jpg
-assets/images/sliders/!bg.jpg
-assets/images/sliders/*.png
-assets/images/sliders/*.jpg
+/assets/images/products/*.png
+/assets/images/products/*.jpg
+/assets/images/sliders/!bg.jpg
+/assets/images/sliders/*.png
+/assets/images/sliders/*.jpg
+/assets/images/products/productgallery/*

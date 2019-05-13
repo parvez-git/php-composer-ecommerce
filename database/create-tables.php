@@ -35,6 +35,13 @@ Capsule::schema()->create('products', function ($table) {
     $table->boolean('active');
     $table->boolean('active_on_slider');
     $table->timestamps();
+}); 
+
+Capsule::schema()->create('product_images', function ($table) {
+    $table->increments('id');
+    $table->integer('product_id');
+    $table->string('image');
+    $table->timestamps();
 });
 
 Capsule::schema()->create('orders', function ($table) {
@@ -57,4 +64,4 @@ Capsule::schema()->create('order_products', function ($table) {
     $table->integer('quantity');
     $table->float('price');
     $table->timestamps();
-});
+}); 

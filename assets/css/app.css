@@ -327,6 +327,7 @@ img {
 .preview-thumbnail.nav-tabs li {
     width: 18%;
     margin-right: 2.5%;
+    margin-bottom: 2.5%;
 }
 
 .preview-thumbnail.nav-tabs li img {
@@ -512,7 +513,8 @@ img {
     border: 1px solid rgba(0, 0, 0, .1);
     overflow: hidden;
     position: relative;
-    z-index: 1
+    z-index: 1;
+    margin-bottom: 30px;
 }
 
 .product-grid .product-image {
@@ -775,6 +777,13 @@ img {
     font-size: 12px;
     font-weight: bold;
     float: right;
+}
+
+input.search-box {
+    border: 1px solid #ddd;
+    outline: none;
+    padding: 4px 8px;
+    width: 100%;
 }
 
 
