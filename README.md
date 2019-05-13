@@ -18,4 +18,4 @@
 
 #### SCREENSHOT
 
-<img src="https://github.com/parvez-git/php-composer-ecommerce/tree/master/assets/images/demo/home.jpg">
+<img src="https://github.com/parvez-git/php-composer-ecommerce/blob/master/assets/images/demo/home.jpg">
